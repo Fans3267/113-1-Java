@@ -20,8 +20,7 @@ public class SmartTv {
     public void turnOnTv(){
         televisionOn = true;
         System.out.println("...Tv is turning On");
-        System.out.println("Current channel: " + channel);
-        System.out.println("Current Volume: " + volume);
+        status();
     }
     
     public void turnOffTv(){
@@ -29,29 +28,38 @@ public class SmartTv {
         System.out.println("......Tv turned Off");
     }
     
+    public void status(){
+        System.out.println("Tv in:\nChannel: " + channel +" Volume: " + volume);
+    }
+    
     public void increaseVolume(){
         volume++;
-        System.out.println("+ Volume in:" + volume);
+        System.out.println("Volume+");
+        status();
     }
     
     public void reduceVolume(){
         volume--;
-        System.out.println("- Volume in:" + volume);
+        System.out.println("Volume-");
+        status();
     }
     
     public void increaseChannel(){
         channel++;
-        System.out.println("Channel moved to (+): " + channel);
+        System.out.println("Channel+");
+        status();
     }
     
     public void reduceChannel(){
         channel--;
-        System.out.println("Channel moved to (-): " + channel);
+        System.out.println("Channel-");
+        status();
     }
     
     public void changeChannelTo(int newChannel){
         channel = newChannel;
-        System.out.println("New Channel: " + channel);
+        System.out.println("Channel modified...");
+        status();
     }
     
 //aqui...    
@@ -87,7 +95,7 @@ public class SmartTv {
                reduceChannel();
                break;
            case 5:
-               System.out.println("New channel: ");
+               System.out.println("Insert New channel: ");
                channel = scan.nextInt();
                changeChannelTo(channel);
                break;
