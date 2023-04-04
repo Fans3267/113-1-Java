@@ -1,5 +1,5 @@
-This a menu simulation of Smart Tv controller. 
-User interact with menu by options into the console.
+It simulates a Smart Tv controller. 
+Here, the user interact with a menu selecting options into the console.
 
 Files:
 App.java : Main class
