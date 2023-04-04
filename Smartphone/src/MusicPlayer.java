@@ -1,6 +1,8 @@
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Random;
+
 
 public class MusicPlayer {
     private ArrayList<String> musicList;
@@ -10,9 +12,11 @@ public class MusicPlayer {
 
     public MusicPlayer() {
         musicList = new ArrayList<>();
-        musicList.add("Song 1");
-        musicList.add("Song 2");
-        musicList.add("Song 3");
+
+        //function to generate a music list:
+        for (int i = 1; i < 5; i++) {
+            musicList.add("Song " + i);
+        }
         playing = false;
         currentSong = "";
         scanner = new Scanner(System.in);
@@ -24,7 +28,8 @@ public class MusicPlayer {
             System.out.println("1. Play");
             System.out.println("2. Pause");
             System.out.println("3. Select music from list");
-            System.out.println("0. Exit");
+            System.out.println("4. Next music on Playlist");
+            System.out.println("0. Exit Music Player...");
 
             int choice = scanner.nextInt();
 
@@ -41,6 +46,9 @@ public class MusicPlayer {
                 case 3:
                     selectMusic();
                     break;
+                case 4:
+                    nextMusic();
+                    break;
                 default:
                     System.out.println("Invalid choice!");
                     break;
@@ -49,20 +57,25 @@ public class MusicPlayer {
     }
 
     public void play() {
-        if (!playing && !currentSong.equals("")) {
+        if (!playing && currentSong.equals("")) {
             playing = true;
-            System.out.println("Playing " + currentSong);
+            //selecting a music by random music player
+            Random random = new Random();
+            int randomIndex = random.nextInt(musicList.size());
+            currentSong = musicList.get(randomIndex);
+
+            System.out.println("...Playing " + currentSong);
         } else {
-            System.out.println("No song selected or song is already playing!");
+            System.out.println("...Song is already playing!");
         }
     }
 
     public void pause() {
         if (playing) {
             playing = false;
-            System.out.println("Pausing " + currentSong);
+            System.out.println("...Pausing " + currentSong);
         } else {
-            System.out.println("No song playing!");
+            System.out.println("...No song playing!");
         }
     }
 
@@ -77,7 +90,24 @@ public class MusicPlayer {
 
         if (choice < 1 || choice > musicList.size()) {
             System.out.println("Invalid choice!");
+        } else {
+            currentSong = musicList.get(choice - 1);
+            System.out.println("...Playing: " + currentSong);
         }
     }
 
+    public void nextMusic() {
+        //System.out.println("Select a song from the list: ");
+
+        int index = musicList.indexOf(currentSong);
+
+        if (index >= (musicList.size()-1)) {
+            currentSong = musicList.get(0);
+            System.out.println("...Playing: " + currentSong);
+        } else {
+            currentSong = musicList.get(index + 1);
+            System.out.println("...Playing: " + currentSong);
+        }
+
+    }
 }
