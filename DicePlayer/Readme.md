@@ -1,6 +1,8 @@
 ## App to Play different kind of dices (4, 6, 8, 10, 12 side dice)
 
-DicePlayer class, to select a type of Dice and the number of dices to roll.
+The application has its Main() method to crate an instance of the DicePlayer class.
+
+The DicePlayer calls the methods to select a type of Dice and the number of dices to roll.
 
 It has two methods: run() and rollDice();
  * run() informs and verifies the user's choice. If: 0, 4, 6, 8, 10, 12 or Invalid option.
