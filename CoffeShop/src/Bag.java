@@ -47,6 +47,7 @@ public class Bag {
         if (index >= 0 && index < items.size()) {
             items.remove(index);
             prices.remove(index);
+            quantities.remove(index);
             System.out.println("Item removed from bag");
         } else {
             System.out.println("Invalid index");
