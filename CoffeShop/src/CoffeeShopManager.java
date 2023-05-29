@@ -68,10 +68,10 @@ public class CoffeeShopManager {
 
     private void cancelItem() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Which item do you want to cancel?");
+        System.out.println("Which item number do you want to cancel?");
         System.out.println(bag.summarizeOrder());
         int itemOption = scanner.nextInt();
-        bag.cancelItem(itemOption);
+        bag.cancelItem(itemOption-1);
         System.out.println("Item canceled");
     }
 
