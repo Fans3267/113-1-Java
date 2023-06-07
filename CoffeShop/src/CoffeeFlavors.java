@@ -1,4 +1,6 @@
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,13 +25,16 @@ public class CoffeeFlavors {
         prices.add(2.0);
         flavors.add("Latte");
         prices.add(2.2);
+
     }
 
     public void listFlavors() {
-        System.out.println("Here are the available flavors:");
+        StringBuilder message_flavors = new StringBuilder("");
         for (int i = 0; i < flavors.size(); i++) {
-            System.out.println((i + 1) + ". " + flavors.get(i) + " - $" + prices.get(i));
+            message_flavors.append("\n" + flavors.get(i) + "   $ " + prices.get(i));
         }
+        JOptionPane.showMessageDialog(null, new String(message_flavors),"Choose your flavor:",JOptionPane.INFORMATION_MESSAGE);
+
     }
 
     public String getFlavor(int option) {

@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,16 +30,15 @@ public class Bag {
     public double summarizeOrder() {
         double total = 0;
         if (items.isEmpty()) {
-            System.out.println("No items in bag");
+            JOptionPane.showMessageDialog(null, "No items in bag");
         } else {
-            System.out.println("Here's a summary of your order:");
-            System.out.println("Qt.:    Flavors:    Prices:");
-            //total = 0;
+            StringBuilder bag_summary = new StringBuilder("Qt.:    Flavors:    Prices: ");
             for (int i = 0; i < items.size(); i++) {
-                System.out.println(quantities.get(i) + " __   " + items.get(i) + " __  $" + quantities.get(i) * prices.get(i));
+                bag_summary.append("\n" + quantities.get(i) + " __   " + items.get(i) + " __  $" + quantities.get(i) * prices.get(i));
                 total += quantities.get(i) * prices.get(i);
             }
-            System.out.println("Total: $" + total);
+            bag_summary.append("\nTotal: $" + total);
+            JOptionPane.showMessageDialog(null, new String(bag_summary), "Here's a summary of your order:", JOptionPane.INFORMATION_MESSAGE);
         }
         return total;
     }

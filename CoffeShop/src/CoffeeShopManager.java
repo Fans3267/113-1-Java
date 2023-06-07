@@ -1,6 +1,8 @@
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
+import static javax.swing.JOptionPane.showInputDialog;
+
 public class CoffeeShopManager {
     private CoffeeFlavors flavors;
     private Bag bag;
@@ -21,7 +23,7 @@ public class CoffeeShopManager {
                 "\n4. Cancel the entire process\n5. Pay\n6. Exit";
         JOptionPane.showMessageDialog(null, message_welcome);
         while (true) {
-            int option = Integer.parseInt(JOptionPane.showInputDialog(null, message_options));
+            int option = Integer.parseInt(showInputDialog(null, message_options));
 
             switch (option) {
                 case 1:
@@ -50,11 +52,9 @@ public class CoffeeShopManager {
 
     private void placeOrder() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("What flavor would you like?");
         flavors.listFlavors();
-        int flavorOption = scanner.nextInt();
-        System.out.println("How many bags do you want?");
-        int quantity = scanner.nextInt();
+        int flavorOption = Integer.parseInt(showInputDialog(null, "What flavor would you like to add?"));
+        int quantity = Integer.parseInt(showInputDialog(null, "How many bags do you want?"));
         bag.addItem(flavors.getFlavor(flavorOption), quantity, flavors.getPrice(flavorOption));
         System.out.println("Your order has been added to the bag");
     }
