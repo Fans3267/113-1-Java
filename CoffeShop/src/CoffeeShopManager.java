@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class CoffeeShopManager {
     private CoffeeFlavors flavors;
@@ -15,16 +16,13 @@ public class CoffeeShopManager {
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Welcome to our coffee shop!");
+        String message_welcome = "\"Welcome to our coffee shop!\"";
+        String message_options = "Choose option:\n1. Place an order\n2. Summarize your order\n3. Cancel an item" +
+                "\n4. Cancel the entire process\n5. Pay\n6. Exit";
+        JOptionPane.showMessageDialog(null, message_welcome);
         while (true) {
-            System.out.println("What would you like to do?");
-            System.out.println("1. Place an order");
-            System.out.println("2. Summarize your order");
-            System.out.println("3. Cancel an item");
-            System.out.println("4. Cancel the entire process");
-            System.out.println("5. Pay");
-            System.out.println("6. Exit");
-            int option = scanner.nextInt();
+            int option = Integer.parseInt(JOptionPane.showInputDialog(null, message_options));
+
             switch (option) {
                 case 1:
                     placeOrder();
@@ -42,10 +40,10 @@ public class CoffeeShopManager {
                     pay();
                     break;
                 case 6:
-                    System.out.println("Thank you for visiting our coffee shop!");
+                    JOptionPane.showMessageDialog(null, "Thank you for visiting our coffee shop!");
                     return;
                 default:
-                    System.out.println("Invalid option, please try again");
+                    JOptionPane.showMessageDialog(null, "Invalid option, please try again");
             }
         }
     }
