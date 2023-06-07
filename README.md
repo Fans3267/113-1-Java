@@ -1,3 +1,3 @@
 ## Java projects
 
-See description of each one into their readme.md file 
+More details of each project into their own readme.md file
