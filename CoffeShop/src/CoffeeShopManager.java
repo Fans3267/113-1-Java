@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import javax.swing.JOptionPane;
-
 import static javax.swing.JOptionPane.showInputDialog;
 
 public class CoffeeShopManager {
@@ -20,7 +19,7 @@ public class CoffeeShopManager {
         Scanner scanner = new Scanner(System.in);
         String message_welcome = "\"Welcome to our coffee shop!\"";
         String message_options = "Choose option:\n1. Place an order\n2. Summarize your order\n3. Cancel an item" +
-                "\n4. Cancel the entire process\n5. Pay\n6. Exit";
+                "\n4. Empty/restart bag\n5. Pay\n6. Exit";
         JOptionPane.showMessageDialog(null, message_welcome);
         while (true) {
             int option = Integer.parseInt(showInputDialog(null, message_options));
@@ -56,27 +55,24 @@ public class CoffeeShopManager {
         int flavorOption = Integer.parseInt(showInputDialog(null, "What flavor would you like to add?"));
         int quantity = Integer.parseInt(showInputDialog(null, "How many bags do you want?"));
         bag.addItem(flavors.getFlavor(flavorOption), quantity, flavors.getPrice(flavorOption));
-        System.out.println("Your order has been added to the bag");
+        JOptionPane.showMessageDialog(null, "Item added into the bag", "Done!", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void summarizeOrder() {
-        System.out.println("Here is your order summary:");
-        System.out.println(bag.summarizeOrder());
+        bag.summarizeOrder();
     }
 
     private void cancelItem() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Which item number do you want to cancel?");
-        System.out.println(bag.summarizeOrder());
-        int itemOption = scanner.nextInt();
+        bag.summarizeOrder();
+        int itemOption = Integer.parseInt(showInputDialog(null, "Which item number do you want to cancel?", "Cancel", JOptionPane.WARNING_MESSAGE));
         bag.cancelItem(itemOption-1);
-        System.out.println("Item canceled");
     }
 
     private void cancelProcess() {
         bag.cleanBagOrder();
         orderNumber = 0;
-        System.out.println("Process canceled");
+        //System.out.println("Process canceled");
     }
 
     private void pay() {

@@ -30,14 +30,14 @@ public class Bag {
     public double summarizeOrder() {
         double total = 0;
         if (items.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No items in bag");
+            JOptionPane.showMessageDialog(null, "No items in bag", "Summary:", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            StringBuilder bag_summary = new StringBuilder("Qt.:    Flavors:    Prices: ");
+            StringBuilder bag_summary = new StringBuilder("Nr.     Qt.(s):    Flavor(s):    Amount(s): ");
             for (int i = 0; i < items.size(); i++) {
-                bag_summary.append("\n" + quantities.get(i) + " __   " + items.get(i) + " __  $" + quantities.get(i) * prices.get(i));
+                bag_summary.append("\n" + i+1 + "      " + quantities.get(i) + "     _       " + items.get(i) + "      _     $" + String.format("%.2f", quantities.get(i) * prices.get(i)));
                 total += quantities.get(i) * prices.get(i);
             }
-            bag_summary.append("\nTotal: $" + total);
+            bag_summary.append("\nTotal: $" + String.format("%.2f", total));
             JOptionPane.showMessageDialog(null, new String(bag_summary), "Here's a summary of your order:", JOptionPane.INFORMATION_MESSAGE);
         }
         return total;
@@ -48,9 +48,9 @@ public class Bag {
             items.remove(index);
             prices.remove(index);
             quantities.remove(index);
-            System.out.println("Item removed from bag");
+            JOptionPane.showMessageDialog(null, "Item removed from bag");
         } else {
-            System.out.println("Invalid index");
+            JOptionPane.showMessageDialog(null, "Index out of Range", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -58,7 +58,7 @@ public class Bag {
         items.clear();
         prices.clear();
         quantities.clear();
-        System.out.println("...Process Finished");
+        JOptionPane.showMessageDialog(null, "...All items removed\nYou can restart the process or exit", "Empty", JOptionPane.WARNING_MESSAGE);
     }
 }
 
