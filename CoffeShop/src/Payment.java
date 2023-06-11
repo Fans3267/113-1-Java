@@ -1,5 +1,8 @@
+import javax.swing.*;
 import java.util.Random;
-import java.util.Scanner;
+
+import static javax.swing.JOptionPane.showInputDialog;
+
 /**
  * The Payment class stores information about the payment and order, and provides methods to verify the payment and authorize the order.
  * The setPaymentOption method sets the payment option.
@@ -7,37 +10,32 @@ import java.util.Scanner;
  * The authorizeOrder method checks whether the payment has been verified, and if so, generates a random order number and prints it to the console.
  */
 public class Payment {
-    private String paymentOption;
     private double amount;
     private boolean verified;
-    private int orderNumber;
-
-
     public Payment(double amount) {
         this.amount = amount;
     }
 
-    public void setPaymentOption() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("How do you want to pay?");
-        System.out.println("1. Cash");
-        System.out.println("2. Credit card");
-        int paymentOption = scanner.nextInt();
-        //double amount = bag.summarizeOrder();
+    public String setPaymentOption() {
+        String Option = "";
+        String message_payment = "How do you want to pay?\n1. Cash\n2. Credit card\n";
+        int paymentOption = Integer.parseInt(showInputDialog(null, message_payment));
+        switch (paymentOption){
+            case 1 :
+                Option = "Cash";
+                break;
+            case 2 :
+                Option = "Credit card";
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Invalid option, please try again");
+        }
+        return Option;
     }
 
     public boolean verifyPayment() {
         Random random = new Random();
         verified = random.nextBoolean();
         return verified;
-    }
-    public void authorizeOrder() {
-        if (verified) {
-            orderNumber = (int) (Math.random() * 100000);
-            System.out.println("Order authorized. Your order number is: " + orderNumber);
-        } else {
-            System.out.println("Payment not verified. Order not authorized");
-        }
-
     }
 }
