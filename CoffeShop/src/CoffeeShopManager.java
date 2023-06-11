@@ -16,9 +16,8 @@ public class CoffeeShopManager {
     }
 
     public void run() {
-        Scanner scanner = new Scanner(System.in);
         String message_welcome = "\"Welcome to our coffee shop!\"";
-        String message_options = "Choose option:\n1. Place an order\n2. Summarize your order\n3. Cancel an item" +
+        String message_options = "Choose option:\n1. Place order / add item\n2. Summarize your order\n3. Cancel an item" +
                 "\n4. Empty/restart bag\n5. Pay\n6. Exit";
         JOptionPane.showMessageDialog(null, message_welcome);
         while (true) {
@@ -72,18 +71,27 @@ public class CoffeeShopManager {
     private void cancelProcess() {
         bag.cleanBagOrder();
         orderNumber = 0;
-        //System.out.println("Process canceled");
+        //"Process canceled"
     }
 
+    private double ammountToPay() {
+        double totalPay = bag.summarizeOrder();
+        return totalPay;
+    }
     private void pay() {
-        payment.setPaymentOption();
-        boolean paymentResult = payment.verifyPayment();
-
-        if (paymentResult) {
-            payment.authorizeOrder();
-            bag.cleanBagOrder();//clear the bag to next client
+        if (ammountToPay() != 0.0){
+            String paymentOption = payment.setPaymentOption();
+            boolean paymentResult = payment.verifyPayment();
+            if (paymentResult) {
+                orderNumber = (int) (Math.random() * 100000);
+                JOptionPane.showMessageDialog(null, "Yor payment by: " + paymentOption + " was processed\nYour order number is: "+ orderNumber, "Order Finished!", JOptionPane.INFORMATION_MESSAGE);
+                bag.cleanBagOrder();//to clear the bag to next client
+            } else {
+                JOptionPane.showMessageDialog(null, "Yor payment by: " + paymentOption + " was rejected", "Warning!", JOptionPane.WARNING_MESSAGE);
+            }
         } else {
-            System.out.println("Payment rejected, please try again or choose another payment option");
+            JOptionPane.showMessageDialog(null, "No items in bag", "NO Payment:", JOptionPane.INFORMATION_MESSAGE);
         }
+
     }
 }
