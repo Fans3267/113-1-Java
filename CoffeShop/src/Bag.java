@@ -3,12 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The Bag class contains a list of items and prices, which can be added to or removed from.
+ * The Bag class contains a list of items and prices, which can be added or removed.
  * The addItem method adds an item and its price to the bag.
  * The summarizeOrder method prints a summary of the items and prices in the bag to the console, along with the total price.
- * The getTotal method returns the total price of the items in the bag.
  * The cancelItem method removes an item from the bag at a given index.
- * The cancelOrder method removes all items from the bag.
+ * The cleanBagOrder method removes all items from the bag.
  */
 public class Bag {
     private List<String> items;
@@ -58,7 +57,7 @@ public class Bag {
         items.clear();
         prices.clear();
         quantities.clear();
-        JOptionPane.showMessageDialog(null, "...All items removed\nYou can restart the process or exit", "Empty", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, "...Bag was empty\nReady to new process", "Empty", JOptionPane.WARNING_MESSAGE);
     }
 }
 
