@@ -12,6 +12,7 @@ import static javax.swing.JOptionPane.showInputDialog;
 public class Payment {
     private double amount;
     private boolean verified;
+
     public Payment(double amount) {
         this.amount = amount;
     }

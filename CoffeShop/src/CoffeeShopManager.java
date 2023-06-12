@@ -75,8 +75,8 @@ public class CoffeeShopManager {
     }
 
     private double ammountToPay() {
-        double totalPay = bag.summarizeOrder();
-        return totalPay;
+        double totalToPay = bag.summarizeOrder();
+        return totalToPay;
     }
     private void pay() {
         if (ammountToPay() != 0.0){
@@ -90,7 +90,7 @@ public class CoffeeShopManager {
                 JOptionPane.showMessageDialog(null, "Yor payment by: " + paymentOption + " was rejected", "Warning!", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "No items in bag", "NO Payment:", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No items in bag", "NO Payment to process!", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }
