@@ -30,8 +30,10 @@ public class CoffeeFlavors {
 
     public void listFlavors() {
         StringBuilder message_flavors = new StringBuilder("");
+        int j = 1;
         for (int i = 0; i < flavors.size(); i++) {
-            message_flavors.append("\n" + flavors.get(i) + "   $ " + prices.get(i));
+            message_flavors.append("\n" + j + " " + flavors.get(i) + "   $ " + prices.get(i));
+            j++;
         }
         JOptionPane.showMessageDialog(null, new String(message_flavors),"Choose your flavor:",JOptionPane.INFORMATION_MESSAGE);
 
