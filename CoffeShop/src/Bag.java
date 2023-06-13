@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.swing.JOptionPane.showInputDialog;
+
 /**
  * The Bag class contains a list of items and prices, which can be added or removed.
  * The addItem method adds an item and its price to the bag.
@@ -31,9 +33,11 @@ public class Bag {
         if (items.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No items in bag", "Summary:", JOptionPane.INFORMATION_MESSAGE);
         } else {
+            int j = 1;
             StringBuilder bag_summary = new StringBuilder("Nr.     Qt.(s):    Flavor(s):    Amount(s): ");
             for (int i = 0; i < items.size(); i++) {
-                bag_summary.append("\n" + i+1 + "      " + quantities.get(i) + "     _       " + items.get(i) + "      _     $" + String.format("%.2f", quantities.get(i) * prices.get(i)));
+                bag_summary.append("\n" + j + "      " + quantities.get(i) + "     _       " + items.get(i) + "      _     $" + String.format("%.2f", quantities.get(i) * prices.get(i)));
+                j++;
                 total += quantities.get(i) * prices.get(i);
             }
             bag_summary.append("\nTotal: $" + String.format("%.2f", total));
@@ -42,14 +46,22 @@ public class Bag {
         return total;
     }
 
-    public void cancelItem(int index) {
-        if (index >= 0 && index < items.size()) {
-            items.remove(index);
-            prices.remove(index);
-            quantities.remove(index);
-            JOptionPane.showMessageDialog(null, "Item removed from bag");
+    public void cancelItem() {
+        if (items.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No items in bag", "Summary:", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Index out of Range", "ERROR", JOptionPane.ERROR_MESSAGE);
+            //int index;
+            summarizeOrder();
+            int index = Integer.parseInt(showInputDialog(null, "Which item number do you want to cancel?", "Cancel", JOptionPane.WARNING_MESSAGE));
+            if (index >= 0 && index < items.size()) {
+                items.remove(index-1);
+                prices.remove(index-1);
+                quantities.remove(index-1);
+                JOptionPane.showMessageDialog(null, "Item removed from bag");
+                summarizeOrder();
+            } else {
+                JOptionPane.showMessageDialog(null, "Index out of Range", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
