@@ -21,7 +21,7 @@ public class CoffeeShopManager {
                 "\n4. Empty/restart bag\n5. Pay\n6. Exit";
         JOptionPane.showMessageDialog(null, message_welcome);
         while (true) {
-            int option = Integer.parseInt(showInputDialog(null, message_options));
+            int option = Integer.parseInt(showInputDialog(null, message_options, "CoffeShop Manager", JOptionPane.QUESTION_MESSAGE));
 
             switch (option) {
                 case 1:
@@ -49,7 +49,6 @@ public class CoffeeShopManager {
     }
 
     private void placeOrder() {
-        Scanner scanner = new Scanner(System.in);
         flavors.listFlavors();
         int flavorOption = Integer.parseInt(showInputDialog(null, "What flavor would you like to add?"));
         int quantity = Integer.parseInt(showInputDialog(null, "How many bags do you want?"));
@@ -62,10 +61,7 @@ public class CoffeeShopManager {
     }
 
     private void cancelItem() {
-        Scanner scanner = new Scanner(System.in);
-        bag.summarizeOrder();
-        int itemOption = Integer.parseInt(showInputDialog(null, "Which item number do you want to cancel?", "Cancel", JOptionPane.WARNING_MESSAGE));
-        bag.cancelItem(itemOption-1);
+        bag.cancelItem();
     }
 
     private void cancelProcess() {
