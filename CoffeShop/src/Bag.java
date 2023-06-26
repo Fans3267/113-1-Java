@@ -52,15 +52,20 @@ public class Bag {
         } else {
             //int index;
             summarizeOrder();
-            int index = Integer.parseInt(showInputDialog(null, "Which item number do you want to cancel?", "Cancel", JOptionPane.WARNING_MESSAGE));
-            if (index >= 0 && index < items.size()) {
-                items.remove(index-1);
-                prices.remove(index-1);
-                quantities.remove(index-1);
-                JOptionPane.showMessageDialog(null, "Item removed from bag");
-                summarizeOrder();
-            } else {
-                JOptionPane.showMessageDialog(null, "Index out of Range", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+            try{
+                int index = Integer.parseInt(showInputDialog(null, "Which item number do you want to cancel?", "Cancel", JOptionPane.WARNING_MESSAGE));
+                if (index >= 0 && index <= items.size()) {
+                    items.remove(index-1);
+                    prices.remove(index-1);
+                    quantities.remove(index-1);
+                    JOptionPane.showMessageDialog(null, "Item removed from bag");
+                    summarizeOrder();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Index out of Range", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            }catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Please enter a valid Integer");
             }
         }
     }
