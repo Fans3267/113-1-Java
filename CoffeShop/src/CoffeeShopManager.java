@@ -21,8 +21,6 @@ public class CoffeeShopManager {
                 "\n4. Empty/restart bag\n5. Pay\n6. Exit";
         JOptionPane.showMessageDialog(null, message_welcome);
         while (true) {
-
-
             try{
                 int option = Integer.parseInt(showInputDialog(null, message_options, "CoffeShop Manager", JOptionPane.QUESTION_MESSAGE));
                 switch (option) {
@@ -50,16 +48,19 @@ public class CoffeeShopManager {
             } catch (NumberFormatException e){
                 JOptionPane.showMessageDialog(null, "Please enter a valid Integer");
             }
-
         }
     }
 
     private void placeOrder() {
         flavors.listFlavors();
-        int flavorOption = Integer.parseInt(showInputDialog(null, "What flavor (number) would you like to add?"));
-        int quantity = Integer.parseInt(showInputDialog(null, "How many cups do you want?"));
-        bag.addItem(flavors.getFlavor(flavorOption), quantity, flavors.getPrice(flavorOption));
-        JOptionPane.showMessageDialog(null, "Item added into the bag", "Done!", JOptionPane.INFORMATION_MESSAGE);
+        try {
+            int flavorOption = Integer.parseInt(showInputDialog(null, "What flavor (number) would you like to add?"));
+            int quantity = Integer.parseInt(showInputDialog(null, "How many cups do you want?"));
+            bag.addItem(flavors.getFlavor(flavorOption), quantity, flavors.getPrice(flavorOption));
+            JOptionPane.showMessageDialog(null, "Item added into the bag", "Done!", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Please enter a valid Integer");
+        }
     }
 
     private void summarizeOrder() {
@@ -95,6 +96,5 @@ public class CoffeeShopManager {
         } else {
             JOptionPane.showMessageDialog(null, "Bag is empty!", "NO Payment to process!", JOptionPane.INFORMATION_MESSAGE);
         }
-
     }
 }
