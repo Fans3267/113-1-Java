@@ -25,7 +25,6 @@ public class CoffeeFlavors {
         prices.add(2.0);
         flavors.add("Latte");
         prices.add(2.2);
-
     }
 
     public void listFlavors() {
@@ -36,7 +35,6 @@ public class CoffeeFlavors {
             j++;
         }
         JOptionPane.showMessageDialog(null, new String(message_flavors),"Choose your flavor:",JOptionPane.INFORMATION_MESSAGE);
-
     }
 
     public String getFlavor(int option) {
