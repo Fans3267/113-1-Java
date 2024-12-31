@@ -6,4 +6,4 @@
 
 
 ###### Only used for education purposes
-### Original Project by [jorgefsa23](https://github.com/jorgefsa23/java)
+### Original Code by [jorgefsa23](https://github.com/jorgefsa23/java)
