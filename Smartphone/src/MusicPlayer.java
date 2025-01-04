@@ -2,7 +2,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Random;
 
 
@@ -10,6 +9,10 @@ public class MusicPlayer {
     private JButton button1, button2, button3, button4, button5;
     private JLabel lb2;
     public int value=0;
+
+    private ArrayList<String> musicList = new ArrayList<String>();
+    private boolean playing;
+    private String currentSong ="";
 
     public void run() {
         JFrame frame = new JFrame("Music Player");
@@ -24,39 +27,22 @@ public class MusicPlayer {
         gbc.gridx = 0;
         gbc.fill = GridBagConstraints.NONE;
 
-        //label
-        lb2 = new JLabel(" ",JLabel.LEFT);
-        Dimension labelsize = new Dimension(200, 100);
-        lb2.setPreferredSize(labelsize);
-        lb2.setFont(new Font("Serif", Font.PLAIN, 27));
 
-        // Initialize buttons as class-level variables
-        button1 = new JButton("Play");
-        button2 = new JButton("Stop");
-        button3 = new JButton("Next Music");
-        button4 = new JButton("Select Music");
-        button5 = new JButton("Exit Music Player");
-
-        // Set button sizes
-        Dimension buttonSize = new Dimension(200, 100);
-        button1.setPreferredSize(buttonSize);
-        button2.setPreferredSize(buttonSize);
-        button3.setPreferredSize(buttonSize);
-        button4.setPreferredSize(buttonSize);
-        button5.setPreferredSize(buttonSize);
+        setButtonlabel();
+        setMusicList();
 
         //按鈕偵測+回傳數值
         button1.addActionListener(e -> {
-            value=1;
+            lb2.setText(play());
         });
         button2.addActionListener(e -> {
-            value=2;
+            lb2.setText(pause());
         });
         button3.addActionListener(e -> {
-            value=3;
+            lb2.setText(nextMusic());
         });
         button4.addActionListener(e -> {
-            value=4;
+            lb2.setText(previousMusic());
         });
         button5.addActionListener(e -> {
             frame.dispose();
@@ -80,18 +66,81 @@ public class MusicPlayer {
 
         // Add the panel to the frame
         frame.add(panel);
-
         // Make the frame visible
         frame.setVisible(true);
+    }
+
+    //按鈕+label設定
+    public void setButtonlabel(){
+        //label
+        lb2 = new JLabel(" ",JLabel.CENTER);
+        Dimension labelsize = new Dimension(300, 100);
+        lb2.setPreferredSize(labelsize);
+        lb2.setFont(new Font("Serif", Font.PLAIN, 27));
+
+        // Initialize buttons as class-level variables
+        button1 = new JButton("Play");
+        button2 = new JButton("Pause");
+        button3 = new JButton("Next Music");
+        button4 = new JButton("Previous Music");
+        button5 = new JButton("Exit Music Player");
+
+        // Set button sizes
+        Dimension buttonSize = new Dimension(200, 100);
+        button1.setPreferredSize(buttonSize);
+        button2.setPreferredSize(buttonSize);
+        button3.setPreferredSize(buttonSize);
+        button4.setPreferredSize(buttonSize);
+        button5.setPreferredSize(buttonSize);
+    }
+    //音樂清單設定
+    public void setMusicList(){
+        musicList.add("1. bubble tea");
+        musicList.add("2. NIGHT DANCER");
+        musicList.add("3. September");
+        musicList.add("4. golden hour");
+        musicList.add("5. Wake (Studio)");
+    }
+
+    public String play() {
+        if (!playing && currentSong == "") {
+            playing = true;
+            //selecting a music by random music player
+            Random random = new Random();
+            int randomIndex = random.nextInt(musicList.size());
+            currentSong = musicList.get(randomIndex);
+        }
+        return currentSong;
+    }
+
+    public String pause() {
+        if (playing) {
+            playing = false;
+        }
+        return "Paused";
+    }
+
+    public String previousMusic() {
+        int index = musicList.indexOf(currentSong);
+        if (index <= 0) {
+            currentSong = musicList.getLast();
+        } else currentSong = musicList.get(index - 1);
+        return currentSong;
+    }
+
+    public String nextMusic() {
+        int index = musicList.indexOf(currentSong);
+        if (index >= (musicList.size()-1)) {
+            currentSong = musicList.getFirst();
+        } else currentSong = musicList.get(index + 1);
+        return currentSong;
     }
 }
 
 
 /*
 public MusicPlayer {
-    private ArrayList<String> musicList;
-    private boolean playing;
-    private String currentSong;
+
     public MusicPlayer() {
         musicList = new ArrayList<>();
 
@@ -136,57 +185,5 @@ public MusicPlayer {
 
     }
 
-    public void play() {
-        if (!playing && currentSong.equals("")) {
-            playing = true;
-            //selecting a music by random music player
-            Random random = new Random();
-            int randomIndex = random.nextInt(musicList.size());
-            currentSong = musicList.get(randomIndex);
 
-            System.out.println("...Playing " + currentSong);
-        } else {
-            System.out.println("...Song is already playing!");
-        }
-    }
-
-    public void pause() {
-        if (playing) {
-            playing = false;
-            System.out.println("...Pausing " + currentSong);
-        } else {
-            System.out.println("...No song playing!");
-        }
-    }
-
-    public void selectMusic() {
-        System.out.println("Select a song from the list: ");
-
-        for (int i = 0; i < musicList.size(); i++) {
-            System.out.println((i + 1) + ". " + musicList.get(i));
-        }
-        int choice =1;
-
-        if (choice < 1 || choice > musicList.size()) {
-            System.out.println("Invalid choice!");
-        } else {
-            currentSong = musicList.get(choice - 1);
-            System.out.println("...Playing: " + currentSong);
-        }
-    }
-
-    public void nextMusic() {
-        //System.out.println("Select a song from the list: ");
-
-        int index = musicList.indexOf(currentSong);
-
-        if (index >= (musicList.size()-1)) {
-            currentSong = musicList.get(0);
-            System.out.println("...Playing: " + currentSong);
-        } else {
-            currentSong = musicList.get(index + 1);
-            System.out.println("...Playing: " + currentSong);
-        }
-
-    }
 }*/

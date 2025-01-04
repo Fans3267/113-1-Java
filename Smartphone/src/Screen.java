@@ -44,25 +44,25 @@ public class Screen {
 
         //按鈕偵測+回傳數值
         button1.addActionListener(e -> {
-            frame.setVisible(false);
+            frame.dispose();
             if (listener != null) {
                     listener.onButtonClicked(1);
                 }
             });
         button2.addActionListener(e -> {
-            frame.setVisible(false);
+            frame.dispose();
             if (listener != null) {
                     listener.onButtonClicked(2);
                 }
             });
         button3.addActionListener(e -> {
-            frame.setVisible(false);
+            frame.dispose();
             if (listener != null) {
                     listener.onButtonClicked(3);
                 }
             });
         button4.addActionListener(e -> {
-            frame.setVisible(false);
+            frame.dispose();
             if (listener != null) {
                     listener.onButtonClicked(4);
                 }
