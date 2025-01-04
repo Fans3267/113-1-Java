@@ -1,3 +1,3 @@
 public interface ButtonClickListener {
-    void onButtonClicked(String value);
+    void onButtonClicked(int value);
 }
