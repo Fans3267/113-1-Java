@@ -8,9 +8,8 @@ import java.util.Random;
 public class MusicPlayer {
     private JButton button1, button2, button3, button4, button5;
     private JLabel lb2;
-    public int value=0;
 
-    private ArrayList<String> musicList = new ArrayList<String>();
+    private ArrayList<String> musicList = new ArrayList<>();
     private boolean playing;
     private String currentSong ="";
 

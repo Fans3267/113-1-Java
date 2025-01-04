@@ -1,11 +1,138 @@
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Random;
+
+
+public class PhoneCall {
+    private JButton button1, button2, button3, button4;
+    private JLabel lb2;
+    private JTextField jTextField;
+
+    private boolean callInProgress=false;
+    private boolean incomingCall;
+    private String voiceMail;
+    private String calling="";
+
+    public void run() {
+        //Jframe設定
+        JFrame frame = new JFrame("Music Player");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(450, 800);
+
+        // Create a panel to hold the buttons
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout()); // Use GridBagLayout for centering and spacing
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 0, 10, 0); // Add vertical spacing between buttons
+        gbc.gridx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+
+        setButtonlabel();
+
+        //在phonecall呼叫時隨機(50%)接到電話
+        if((Math.random())*10>=5){
+            incomingCall = true;
+            lb2.setText("Incoming Call!");
+        }
+
+        //按鈕偵測+回傳數值
+        button1.addActionListener(e -> {
+            lb2.setText(call());
+        });
+        button2.addActionListener(e -> {
+            lb2.setText(receiveCall());
+        });
+        button3.addActionListener(e -> {
+            lb2.setText(hangup());
+        });
+        button4.addActionListener(e -> {
+            frame.dispose();
+            ValueReceiver receiver = new ValueReceiver();
+            new Screen(receiver);
+        });
+
+        // Add buttons to the panel with constraints
+        gbc.gridy = 0;
+        panel.add(jTextField , gbc);
+        gbc.gridy = 1;
+        panel.add(lb2, gbc);
+        gbc.gridy = 2;
+        panel.add(button1, gbc);
+        gbc.gridy = 3;
+        panel.add(button2, gbc);
+        gbc.gridy = 4;
+        panel.add(button3, gbc);
+        gbc.gridy = 5;
+        panel.add(button4, gbc);
+
+
+        // Add the panel to the frame
+        frame.add(panel);
+        // Make the frame visible
+        frame.setVisible(true);
+    }
+
+    //按鈕+label設定
+    public void setButtonlabel(){
+
+        //label
+        lb2 = new JLabel(" ",JLabel.CENTER);
+        Dimension labelsize = new Dimension(300, 100);
+        lb2.setPreferredSize(labelsize);
+        lb2.setFont(new Font("Serif", Font.PLAIN, 27));
+
+
+        // Initialize buttons as class-level variables
+        jTextField = new JTextField(15);
+        button1 = new JButton("Call");
+        button2 = new JButton("Respond Call");
+        button3 = new JButton("Hang up");
+        button4 = new JButton("Exit");
+
+        // Set button sizes
+        Dimension buttonSize = new Dimension(200, 100);
+        button1.setPreferredSize(buttonSize);
+        button2.setPreferredSize(buttonSize);
+        button3.setPreferredSize(buttonSize);
+        button4.setPreferredSize(buttonSize);
+    }
+
+    public String call() {
+        if(incomingCall){
+            return "Respond to call first";
+        } else if (callInProgress) {
+            return "Already Calling!";
+        } else if(jTextField.getText().isEmpty()){
+            return "Please Enter Numbers!";
+        }
+        callInProgress = true;
+        return "Calling: "+jTextField.getText();
+    }
+
+    public String receiveCall() {
+        if(incomingCall){
+            incomingCall=false;
+            callInProgress=true;
+            return "You Picked up the call";
+        }else if (callInProgress) return "Already Calling!";
+        return "No Incoming Call";
+    }
+
+    public String hangup() {
+        if (callInProgress) {
+            callInProgress = false;
+            return "Hanged up";
+        }
+        return "Not in a call";
+    }
+}
+
+
+
+/*
 import java.util.Scanner;
 
-/**
- * Note that the run() method in each class is used to simulate the user interaction with the app.
- * Each class has its own run() method that presents a menu of options to the user and then calls the appropriate method based on the user's choice.
- * In this way, the Smartphone class acts as a container for the other classes and provides a unified interface for the user
- * to interact with the various apps.
- */
 public class PhoneCall {
     private boolean callInProgress;
     private boolean incomingCall;
@@ -81,4 +208,4 @@ public class PhoneCall {
             System.out.println("No call in progress!");
         }
     }
-}
+}*/
