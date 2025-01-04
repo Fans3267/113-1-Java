@@ -1,7 +1,6 @@
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 
 public class Smartphone {
 
@@ -9,28 +8,16 @@ public class Smartphone {
     private PhoneCall phoneCall;
     private WebBrowser webBrowser;
     private AgendaApp agendaApp;
-    private Scanner scanner;
 
     public Smartphone() {
         musicPlayer = new MusicPlayer();
         phoneCall = new PhoneCall();
         webBrowser = new WebBrowser();
         agendaApp = new AgendaApp();
-        scanner = new Scanner(System.in);
     }
 
-    public void run() {
-        while (true) {
-            System.out.println("Select an app: ");
-            System.out.println("1. MusicPlayer");
-            System.out.println("2. PhoneCall");
-            System.out.println("3. WebBrowser");
-            System.out.println("4. AgendaApp");
-            System.out.println("0. Exit Smartphone");
-
-            int choice = scanner.nextInt();
-
-            switch (choice) {
+    public void run(int value) {
+            switch (value) {
                 case 0:
                     System.out.println("Goodbye!");
                     return;
@@ -46,12 +33,6 @@ public class Smartphone {
                 case 4:
                     agendaApp.run();
                     break;
-                default:
-                    System.out.println("Invalid choice!");
-                    break;
             }
-
-
-        }
     }
 }

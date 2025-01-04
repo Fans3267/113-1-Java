@@ -4,6 +4,8 @@ import java.awt.*;
 public class Screen {
     private ButtonClickListener listener;
     private JButton button1, button2, button3, button4;
+    private JLabel lb2;
+    public int cmode=0,value=0; //screen music phoneCall agenda web
 
     public Screen(ButtonClickListener listener) {
         this.listener = listener;
@@ -20,6 +22,13 @@ public class Screen {
         gbc.gridx = 0;
         gbc.fill = GridBagConstraints.NONE;
 
+        //label
+        TimeDate timeDate = new TimeDate();
+        lb2 = new JLabel(timeDate.getCurrentDate()+" "+timeDate.getCurrentTime(),JLabel.LEFT);
+        Dimension labelsize = new Dimension(200, 100);
+        lb2.setPreferredSize(labelsize);
+        lb2.setFont(new Font("Serif", Font.PLAIN, 27));
+
         // Initialize buttons as class-level variables
         button1 = new JButton("Music Player");
         button2 = new JButton("Phone Call");
@@ -35,38 +44,40 @@ public class Screen {
 
         //按鈕偵測+回傳數值
         button1.addActionListener(e -> {
+            frame.setVisible(false);
             if (listener != null) {
-                listener.onButtonClicked(1);
-                hideAllButtons();
-            }
-        });
+                    listener.onButtonClicked(1);
+                }
+            });
         button2.addActionListener(e -> {
+            frame.setVisible(false);
             if (listener != null) {
-                listener.onButtonClicked(2);
-                hideAllButtons();
-            }
-        });
+                    listener.onButtonClicked(2);
+                }
+            });
         button3.addActionListener(e -> {
+            frame.setVisible(false);
             if (listener != null) {
-                listener.onButtonClicked(3);
-                hideAllButtons();
-            }
-        });
+                    listener.onButtonClicked(3);
+                }
+            });
         button4.addActionListener(e -> {
+            frame.setVisible(false);
             if (listener != null) {
-                listener.onButtonClicked(4);
-                hideAllButtons();
-            }
-        });
+                    listener.onButtonClicked(4);
+                }
+            });
 
         // Add buttons to the panel with constraints
         gbc.gridy = 0;
-        panel.add(button1, gbc);
+        panel.add(lb2, gbc);
         gbc.gridy = 1;
-        panel.add(button2, gbc);
+        panel.add(button1, gbc);
         gbc.gridy = 2;
-        panel.add(button3, gbc);
+        panel.add(button2, gbc);
         gbc.gridy = 3;
+        panel.add(button3, gbc);
+        gbc.gridy = 4;
         panel.add(button4, gbc);
 
         // Add the panel to the frame
@@ -76,19 +87,20 @@ public class Screen {
         frame.setVisible(true);
     }
 
+    /*
     //(方法)隱藏+展示所有按鈕
-    private void hideAllButtons() {
+    public void hideAllButtons() {
         button1.setVisible(false);
         button2.setVisible(false);
         button3.setVisible(false);
         button4.setVisible(false);
     }
-    private void showAllButtons() {
+    public void showAllButtons() {
         button1.setVisible(true);
         button2.setVisible(true);
         button3.setVisible(true);
         button4.setVisible(true);
-    }
+    }*/
 
     public static void main(String[] args) throws InterruptedException {
         ValueReceiver receiver = new ValueReceiver();
