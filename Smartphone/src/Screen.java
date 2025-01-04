@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 
-
-
 public class Screen {
     public Screen() {
         JFrame frame = new JFrame("Basic Window with Buttons");
@@ -59,8 +57,5 @@ public class Screen {
         Smartphone smartphone = new Smartphone();
         smartphone.run();
     }
-
-
-
 }
 
