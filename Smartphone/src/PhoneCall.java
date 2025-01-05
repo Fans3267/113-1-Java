@@ -1,22 +1,16 @@
-
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
-
 
 public class PhoneCall {
     private JButton button1, button2, button3, button4;
     private JLabel lb2;
     private JTextField jTextField;
-
     private boolean callInProgress=false;
     private boolean incomingCall;
-    private String voiceMail;
-    private String calling="";
 
     public void run() {
         //Jframe設定
-        JFrame frame = new JFrame("Music Player");
+        JFrame frame = new JFrame("Phone Call");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(450, 800);
 
