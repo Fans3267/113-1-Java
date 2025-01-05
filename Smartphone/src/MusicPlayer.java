@@ -4,82 +4,91 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MusicPlayer {
-    private JButton button1, button2, button3, button4, button5;
-    private JLabel lb2;
-    private ArrayList<String> musicList = new ArrayList<>();
-    private boolean playing;
-    private String currentSong ="";
+    // 宣告主要按鈕和標籤
+    private JButton button1, button2, button3, button4, button5; // 五個按鈕
+    private JLabel lb2; // 用於顯示播放狀態的標籤
+    private ArrayList<String> musicList = new ArrayList<>(); // 儲存音樂清單
+    private boolean playing; // 播放狀態
+    private String currentSong =""; // 當前播放的音樂名稱
 
     public void run() {
+        // 設定 JFrame 視窗
         JFrame frame = new JFrame("Music Player");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(450, 800);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 關閉視窗時結束程式
+        frame.setSize(450, 800); // 設定視窗大小
 
-        // Create a panel to hold the buttons
+        // 建立 JPanel 並設定佈局
         JPanel panel = new JPanel();
-        panel.setLayout(new GridBagLayout()); // Use GridBagLayout for centering and spacing
+        panel.setLayout(new GridBagLayout()); // 使用 GridBagLayout 進行佈局
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 0, 10, 0); // Add vertical spacing between buttons
-        gbc.gridx = 0;
-        gbc.fill = GridBagConstraints.NONE;
+        gbc.insets = new Insets(10, 0, 10, 0); // 設定元件之間的垂直間距
+        gbc.gridx = 0; // 將元件置中
+        gbc.fill = GridBagConstraints.NONE; // 不拉伸元件
 
+        // 初始化按鈕和標籤
         setButtonlabel();
         setMusicList();
-        //按鈕偵測+回傳數值
+
+        // 設定按鈕的事件監聽器
+        // 播放按鈕的動作
         button1.addActionListener(e -> {
             lb2.setText(play());
         });
+        // 暫停按鈕的動作
         button2.addActionListener(e -> {
             lb2.setText(pause());
         });
+        // 下一首按鈕的動作
         button3.addActionListener(e -> {
             lb2.setText(nextMusic());
         });
+        // 上一首按鈕的動作
         button4.addActionListener(e -> {
             lb2.setText(previousMusic());
         });
+        // 退出按鈕的動作
         button5.addActionListener(e -> {
-            frame.dispose();
+            frame.dispose(); // 關閉視窗
             ValueReceiver receiver = new ValueReceiver();
-            new Screen(receiver);
+            new Screen(receiver); // 開啟新的 Screen 視窗
         });
 
-        // Add buttons to the panel with constraints
+        // 將元件添加到 JPanel
         gbc.gridy = 0;
-        panel.add(lb2, gbc);
+        panel.add(lb2, gbc); // 添加標籤
         gbc.gridy = 1;
-        panel.add(button1, gbc);
+        panel.add(button1, gbc); // 添加播放按鈕
         gbc.gridy = 2;
-        panel.add(button2, gbc);
+        panel.add(button2, gbc); // 添加暫停按鈕
         gbc.gridy = 3;
-        panel.add(button3, gbc);
+        panel.add(button3, gbc); // 添加下一首按鈕
         gbc.gridy = 4;
-        panel.add(button4, gbc);
+        panel.add(button4, gbc); // 添加上一首按鈕
         gbc.gridy = 5;
-        panel.add(button5, gbc);
+        panel.add(button5, gbc); // 添加退出按鈕
 
-        // Add the panel to the frame
+        // 將面板添加到 JFrame
         frame.add(panel);
-        // Make the frame visible
+        // 顯示視窗
         frame.setVisible(true);
     }
 
-    //按鈕+label設定
+    // 初始化按鈕和標籤
     public void setButtonlabel(){
-        //label
-        lb2 = new JLabel(" ",JLabel.CENTER);
+        // 設定標籤
+        lb2 = new JLabel(" ",JLabel.CENTER); // 顯示播放狀態的標籤
         Dimension labelsize = new Dimension(300, 100);
-        lb2.setPreferredSize(labelsize);
-        lb2.setFont(new Font("Serif", Font.PLAIN, 27));
+        lb2.setPreferredSize(labelsize); // 設定標籤大小
+        lb2.setFont(new Font("Serif", Font.PLAIN, 27)); // 設定字型
 
-        // Initialize buttons as class-level variables
-        button1 = new JButton("Play");
-        button2 = new JButton("Pause");
-        button3 = new JButton("Next Music");
-        button4 = new JButton("Previous Music");
-        button5 = new JButton("Exit Music Player");
+        // 初始化按鈕
+        button1 = new JButton("Play"); // 播放按鈕
+        button2 = new JButton("Pause"); // 暫停按鈕
+        button3 = new JButton("Next Music"); // 下一首按鈕
+        button4 = new JButton("Previous Music"); // 上一首按鈕
+        button5 = new JButton("Exit Music Player"); // 退出按鈕
 
-        // Set button sizes
+        // 設定按鈕大小
         Dimension buttonSize = new Dimension(200, 100);
         button1.setPreferredSize(buttonSize);
         button2.setPreferredSize(buttonSize);
@@ -87,7 +96,8 @@ public class MusicPlayer {
         button4.setPreferredSize(buttonSize);
         button5.setPreferredSize(buttonSize);
     }
-    //音樂清單設定
+
+    // 初始化音樂清單
     public void setMusicList(){
         musicList.add("1. bubble tea");
         musicList.add("2. NIGHT DANCER");
@@ -96,37 +106,48 @@ public class MusicPlayer {
         musicList.add("5. Wake (Studio)");
     }
 
+    // 播放音樂
     public String play() {
-        if (!playing && currentSong == "") {
-            playing = true;
-            //selecting a music by random music player
-            Random random = new Random();
+        if (!playing && currentSong == "") { // 當未播放且沒有選擇音樂時
+            playing = true; // 設定播放狀態
+            Random random = new Random(); // 隨機播放音樂
             int randomIndex = random.nextInt(musicList.size());
-            currentSong = musicList.get(randomIndex);
+            currentSong = musicList.get(randomIndex); // 設定當前播放的音樂
         }
-        return currentSong;
+        return currentSong; // 返回當前播放的音樂名稱
     }
+
+    // 暫停音樂
     public String pause() {
-        if (playing) {
-            playing = false;
+        if (playing) { // 如果正在播放
+            playing = false; // 設定為暫停狀態
         }
-        return "Paused";
+        return "Paused"; // 返回暫停訊息
     }
+
+    // 播放上一首音樂
     public String previousMusic() {
-        int index = musicList.indexOf(currentSong);
-        if (index <= 0) {
-            currentSong = musicList.getLast();
-        } else currentSong = musicList.get(index - 1);
-        return currentSong;
+        int index = musicList.indexOf(currentSong); // 找到當前音樂的索引
+        if (index <= 0) { // 如果是第一首音樂
+            currentSong = musicList.getLast(); // 播放最後一首音樂
+        } else {
+            currentSong = musicList.get(index - 1); // 播放前一首音樂
+        }
+        return currentSong; // 返回當前播放的音樂名稱
     }
+
+    // 播放下一首音樂
     public String nextMusic() {
-        int index = musicList.indexOf(currentSong);
-        if (index >= (musicList.size()-1)) {
-            currentSong = musicList.getFirst();
-        } else currentSong = musicList.get(index + 1);
-        return currentSong;
+        int index = musicList.indexOf(currentSong); // 找到當前音樂的索引
+        if (index >= (musicList.size() - 1)) { // 如果是最後一首音樂
+            currentSong = musicList.getFirst(); // 播放第一首音樂
+        } else {
+            currentSong = musicList.get(index + 1); // 播放下一首音樂
+        }
+        return currentSong; // 返回當前播放的音樂名稱
     }
 }
+
 /*
 public MusicPlayer {
 
