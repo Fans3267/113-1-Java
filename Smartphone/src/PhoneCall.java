@@ -16,9 +16,9 @@ public class PhoneCall {
 
         //JPanel設定
         JPanel panel = new JPanel();
-        panel.setLayout(new GridBagLayout()); // Use GridBagLayout for centering and spacing
+        panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 0, 10, 0); // Add vertical spacing between buttons
+        gbc.insets = new Insets(10, 0, 10, 0);
         gbc.gridx = 0;
         gbc.fill = GridBagConstraints.NONE;
 
