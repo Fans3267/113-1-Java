@@ -59,8 +59,8 @@ public class AgendaApp {
         jComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                slec = jComboBox.getSelectedIndex(); // 紀錄選中的索引
-                // System.out.println(slec); // 除錯用
+                slec = jComboBox.getSelectedIndex();
+                System.out.println(slec); // 除錯用
             }
         });
 
@@ -151,8 +151,8 @@ public class AgendaApp {
     public String rmmeeting() {
         if(meetList.isEmpty()) return "Nothing to remove!"; //如果無會議 提示無會議可刪除
         jList.setVisible(false);  //隱藏列表
-        updatecombo(); // 更新下拉選單
         if(!jComboBox.isVisible()){
+            updatecombo(); //更新下拉選單
             jComboBox.setVisible(true);  // 顯示下拉選單
             return "Please Select"; // 提示選擇會議
         }
