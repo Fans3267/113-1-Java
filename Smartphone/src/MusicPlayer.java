@@ -1,14 +1,11 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-
 public class MusicPlayer {
     private JButton button1, button2, button3, button4, button5;
     private JLabel lb2;
-
     private ArrayList<String> musicList = new ArrayList<>();
     private boolean playing;
     private String currentSong ="";
@@ -26,10 +23,8 @@ public class MusicPlayer {
         gbc.gridx = 0;
         gbc.fill = GridBagConstraints.NONE;
 
-
         setButtonlabel();
         setMusicList();
-
         //按鈕偵測+回傳數值
         button1.addActionListener(e -> {
             lb2.setText(play());
@@ -111,14 +106,12 @@ public class MusicPlayer {
         }
         return currentSong;
     }
-
     public String pause() {
         if (playing) {
             playing = false;
         }
         return "Paused";
     }
-
     public String previousMusic() {
         int index = musicList.indexOf(currentSong);
         if (index <= 0) {
@@ -126,7 +119,6 @@ public class MusicPlayer {
         } else currentSong = musicList.get(index - 1);
         return currentSong;
     }
-
     public String nextMusic() {
         int index = musicList.indexOf(currentSong);
         if (index >= (musicList.size()-1)) {
@@ -135,8 +127,6 @@ public class MusicPlayer {
         return currentSong;
     }
 }
-
-
 /*
 public MusicPlayer {
 

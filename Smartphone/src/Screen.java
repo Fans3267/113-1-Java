@@ -32,7 +32,6 @@ public class Screen {
         lb2.setFont(new Font("Serif", Font.PLAIN, 27));
 
         buttonSetup();
-
         //按鈕偵測+回傳數值
         button1.addActionListener(e -> {
             frame.dispose();
@@ -114,7 +113,6 @@ public class Screen {
         button3.setPreferredSize(buttonSize);
         button4.setPreferredSize(buttonSize);
     }
-
     /*
     //(方法)隱藏+展示所有按鈕
     public void hideAllButtons() {
@@ -129,7 +127,6 @@ public class Screen {
         button3.setVisible(true);
         button4.setVisible(true);
     }*/
-
     public static void main(String[] args) throws InterruptedException {
         ValueReceiver receiver = new ValueReceiver();
         new Screen(receiver);

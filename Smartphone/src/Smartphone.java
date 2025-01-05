@@ -18,7 +18,7 @@ public class Smartphone {
 
     public void run(int value) {
             switch (value) {
-                case 0
+                case 0:
                     //System.out.println("Goodbye!");
                     return;
                 case 1:

@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Objects;
 
 public class WebBrowser {
     private JButton button1, button2, button3, button4;
@@ -10,7 +8,6 @@ public class WebBrowser {
     private JTextField jTextField;
     private ArrayList<String> webList = new ArrayList<>();
     private int currentpage;
-
 
     public void run() {
         //Jframe設定
@@ -59,7 +56,6 @@ public class WebBrowser {
         panel.add(button3, gbc);
         gbc.gridy = 5;
         panel.add(button4, gbc);
-
 
         // Add the panel to the frame
         frame.add(panel);
@@ -123,9 +119,6 @@ public class WebBrowser {
         return url+" Removed!";
     }
 }
-
-
-
 /*
 import java.util.ArrayList;
 import java.util.Scanner;

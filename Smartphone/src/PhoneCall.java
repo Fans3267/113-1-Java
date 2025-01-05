@@ -23,7 +23,6 @@ public class PhoneCall {
         gbc.fill = GridBagConstraints.NONE;
 
         setButtonlabel();
-
         //在phonecall呼叫時隨機(50%)接到電話
         if((Math.random())*10>=5){
             incomingCall = true;
@@ -60,22 +59,18 @@ public class PhoneCall {
         gbc.gridy = 5;
         panel.add(button4, gbc);
 
-
         // Add the panel to the frame
         frame.add(panel);
         // Make the frame visible
         frame.setVisible(true);
     }
-
     //按鈕+label設定
     public void setButtonlabel(){
-
         //label
         lb2 = new JLabel(" ",JLabel.CENTER);
         Dimension labelsize = new Dimension(300, 100);
         lb2.setPreferredSize(labelsize);
         lb2.setFont(new Font("Serif", Font.PLAIN, 27));
-
 
         // Initialize buttons as class-level variables
         jTextField = new JTextField(15);
@@ -103,7 +98,6 @@ public class PhoneCall {
         callInProgress = true;
         return "Calling: "+jTextField.getText();
     }
-
     public String receiveCall() {
         if(incomingCall){
             incomingCall=false;
@@ -112,7 +106,6 @@ public class PhoneCall {
         }else if (callInProgress) return "Already Calling!";
         return "No Incoming Call";
     }
-
     public String hangup() {
         if (callInProgress) {
             callInProgress = false;
@@ -121,9 +114,6 @@ public class PhoneCall {
         return "Not in a call";
     }
 }
-
-
-
 /*
 import java.util.Scanner;
 
