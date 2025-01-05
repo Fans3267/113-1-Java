@@ -18,8 +18,8 @@ public class Smartphone {
 
     public void run(int value) {
             switch (value) {
-                case 0:
-                    System.out.println("Goodbye!");
+                case 0
+                    //System.out.println("Goodbye!");
                     return;
                 case 1:
                     musicPlayer.run();
@@ -28,10 +28,10 @@ public class Smartphone {
                     phoneCall.run();
                     break;
                 case 3:
-                    webBrowser.run();
+                    agendaApp.run();
                     break;
                 case 4:
-                    agendaApp.run();
+                    webBrowser.run();
                     break;
             }
     }
