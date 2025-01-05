@@ -1,5 +1,7 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class Screen {
     private ButtonClickListener listener;
@@ -29,18 +31,7 @@ public class Screen {
         lb2.setPreferredSize(labelsize);
         lb2.setFont(new Font("Serif", Font.PLAIN, 27));
 
-        // Initialize buttons as class-level variables
-        button1 = new JButton("Music Player");
-        button2 = new JButton("Phone Call");
-        button3 = new JButton("Agenda App");
-        button4 = new JButton("Web Browser");
-
-        // Set button sizes
-        Dimension buttonSize = new Dimension(200, 100);
-        button1.setPreferredSize(buttonSize);
-        button2.setPreferredSize(buttonSize);
-        button3.setPreferredSize(buttonSize);
-        button4.setPreferredSize(buttonSize);
+        buttonSetup();
 
         //按鈕偵測+回傳數值
         button1.addActionListener(e -> {
@@ -85,6 +76,43 @@ public class Screen {
 
         // Make the frame visible
         frame.setVisible(true);
+    }
+
+    public void buttonSetup(){
+        button1 = new JButton();
+        try {
+            Image img = ImageIO.read(getClass().getResource("image/music.png"));
+            button1.setIcon(new ImageIcon(img));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        button2 = new JButton();
+        try {
+            Image img = ImageIO.read(getClass().getResource("image/phonecall.png"));
+            button2.setIcon(new ImageIcon(img));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        button3 = new JButton();
+        try {
+            Image img = ImageIO.read(getClass().getResource("image/agenda.png"));
+            button3.setIcon(new ImageIcon(img));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        button4 = new JButton();
+        try {
+            Image img = ImageIO.read(getClass().getResource("image/web.png"));
+            button4.setIcon(new ImageIcon(img));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Dimension buttonSize = new Dimension(200, 100);
+        button1.setPreferredSize(buttonSize);
+        button2.setPreferredSize(buttonSize);
+        button3.setPreferredSize(buttonSize);
+        button4.setPreferredSize(buttonSize);
     }
 
     /*
